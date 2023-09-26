@@ -60,5 +60,3 @@ extension MainCoordinator: WeatherMenuPresenterCoordinatorDelegate {
         goToDetails(stringURL: withStringURL!)
     }
 }
-
-

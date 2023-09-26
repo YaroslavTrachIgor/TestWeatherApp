@@ -10,8 +10,9 @@ import Foundation
 //MARK: - Main UIModel
 struct CityWeatherUIModel {
     let name: String!
-    let temp: Double!
+    let temp: String!
     let weatherDescription: String!
+    let highLowTemperatureDescription: String!
 }
 
 
@@ -21,7 +22,8 @@ extension CityWeatherUIModel: BaseCellUIModel {
     //MARK: Internal
     func setup(cell: CityWeatherCityTableViewCell) {
         cell.cityNameLabel.text = name
-        cell.tempLabel.text = String("\(temp ?? 0) Degrees F")
+        cell.tempLabel.text = temp
+        cell.lowHighTempLabel.text = highLowTemperatureDescription
         cell.weatherDescriptionLabel.text = weatherDescription
     }
 }

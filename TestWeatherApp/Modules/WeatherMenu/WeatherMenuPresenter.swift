@@ -108,18 +108,21 @@ private extension WeatherMenuPresenter {
     func fetchCitiesWeather() {
         view.showLoadingView()
         citiesWeather = []
+        for i in stringUrls {
+            print(i)
+        }
         Task {
-            for stringUrl in stringUrls {
+            await stringUrls.concurrentForEach({ stringUrl in
                 let apiClient = WeatherMenuAPIClient(url: URL(string: stringUrl)!)
                 do {
                     if let cityWeather = try await apiClient.getCityWeather() {
-                        citiesWeather.append(cityWeather)
+                        self.citiesWeather.append(cityWeather)
                     }
                 } catch {
                     print(Constants.ErrorMessages.basicMessage)
                     print(error)
                 }
-            }
+            })
             DispatchQueue.main.async { [self] in
                 let uiModels = WeatherMenuFormatter.format(citiesWeather)
                 view.updateRows(uiModels)

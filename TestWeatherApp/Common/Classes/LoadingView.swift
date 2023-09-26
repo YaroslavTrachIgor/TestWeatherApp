@@ -31,7 +31,7 @@ final class LoadingView: UIView {
         super.init(frame: frame)
         
         setupActivityIndicator()
-        backgroundColor = .systemGroupedBackground
+        backgroundColor = .clear
     }
     
     

@@ -15,8 +15,9 @@ final class WeatherMenuFormatter {
         return citiesWeather.compactMap { cityWeather in
             CityWeatherUIModel(
                 name: cityWeather.name,
-                temp: cityWeather.main.temp,
-                weatherDescription: cityWeather.weather.first?.main
+                temp: "\(Int(cityWeather.main.temp ?? 0))°F",
+                weatherDescription: cityWeather.weather.first?.main,
+                highLowTemperatureDescription: "H: \(Int(cityWeather.main.temp_max ?? 0))°F L: \(Int(cityWeather.main.temp_min ?? 0))°F"
             )
         }
     }

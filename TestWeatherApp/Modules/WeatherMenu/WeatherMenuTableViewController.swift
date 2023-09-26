@@ -16,13 +16,20 @@ private extension WeatherMenuTableViewController {
             enum SearchBar {
                 
                 //MARK: Static
-                static let searchBarPlaceholder = "Search Cities"
+                static let searchBarPlaceholder = "Search for a city"
                 static let searchBarIconImageName = "magnifyingglass"
             }
             enum NavigationItam {
                 
                 //MARK: Static
                 static let title = "Menu"
+            }
+            enum TableView {
+                
+                //MARK: Static
+                static let header = "Cities"
+                static let footer = "Learn more about weather data and map data on https://openweather.com"
+                static let rowHeight: CGFloat = 30
             }
         }
     }
@@ -50,6 +57,9 @@ final class WeatherMenuTableViewController: UITableViewController {
     private var loadingView: LoadingView?
     private var rows = [CityWeatherUIModel]()
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .darkContent
+    }
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -81,6 +91,18 @@ final class WeatherMenuTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter?.onDidSelect(row: indexPath.row)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        Constants.UI.TableView.rowHeight
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        Constants.UI.TableView.header
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        Constants.UI.TableView.footer
     }
 }
 
@@ -124,6 +146,7 @@ private extension WeatherMenuTableViewController {
     
     //MARK: Private
     func setupSearchBar() {
+        searchBar.barStyle = .black
         searchBar.placeholder = Constants.UI.SearchBar.searchBarPlaceholder
         searchBar.delegate = self
         searchBar.searchBarStyle = .minimal
@@ -135,7 +158,7 @@ private extension WeatherMenuTableViewController {
         let cellNib = UINib(nibName: cellIdentifier, bundle: nil)
         tableView.backgroundColor = .systemGroupedBackground
         tableView.register(cellNib, forCellReuseIdentifier: cellIdentifier)
-        tableView.rowHeight = 85
+        tableView.rowHeight = 120
     }
 }
 
