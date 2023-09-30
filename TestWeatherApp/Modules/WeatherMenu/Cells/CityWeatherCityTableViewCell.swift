@@ -58,6 +58,7 @@ private extension CityWeatherCityTableViewCell {
     //MARK: Private
     func setupCell() {
         tintColor = .white.withAlphaComponent(0.8)
+        selectionStyle = .none
         backgroundColor = .clear
     }
     
