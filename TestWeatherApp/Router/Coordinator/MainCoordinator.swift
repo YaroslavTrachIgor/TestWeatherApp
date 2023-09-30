@@ -18,7 +18,7 @@ protocol Coordinator {
 //MARK: - Main Coordinator protocol
 protocol MainCoordinatorProtocol: Coordinator {
     var builder: MainBuilder? { get set }
-    func goToDetails(stringURL: String)
+    func goToDetails(cityWeather: CityWeather)
 }
 
 
@@ -45,8 +45,8 @@ extension MainCoordinator: MainCoordinatorProtocol {
         navigationController.pushViewController(rootVC!, animated: true)
     }
     
-    internal func goToDetails(stringURL: String) {
-        let detailVC = builder?.goToDetail(stringURL: stringURL)
+    internal func goToDetails(cityWeather: CityWeather) {
+        let detailVC = builder?.goToDetail(cityWeather: cityWeather)
         navigationController.pushViewController(detailVC!, animated: true)
     }
 }
@@ -56,7 +56,7 @@ extension MainCoordinator: MainCoordinatorProtocol {
 extension MainCoordinator: WeatherMenuPresenterCoordinatorDelegate {
     
     //MARK: Internal
-    func presenter(_ presenter: WeatherMenuPresenterProtocol, onGoToDetailed withStringURL: String?) {
-        goToDetails(stringURL: withStringURL!)
+    func presenter(_ presenter: WeatherMenuPresenterProtocol, onGoToDetailed cityWeather: CityWeather?) {
+        goToDetails(cityWeather: cityWeather!)
     }
 }

@@ -7,10 +7,12 @@
 
 import UIKit
 
+//MARK: - Main App Delegate
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        setupBaseNavigationBar()
         return true
     }
 
@@ -22,3 +24,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {}
 }
 
+
+//MARK: - Main methods
+private extension AppDelegate {
+    
+    //MARK: Private
+    func setupBaseNavigationBar() {
+        UINavigationBar.appearance().tintColor = .systemPink
+    }
+}

@@ -16,8 +16,8 @@ private extension CityWeatherCityTableViewCell {
         enum View {
             
             //MARK: Static
-            static let backgroundFirstColor = UIColor.hex("#111442")
-            static let backgroundSecondColor = UIColor.hex("#0e1033")
+            static let backgroundFirstColor = UIColor.hex("#457fca")
+            static let backgroundSecondColor = UIColor.hex("#5691c8")
         }
     }
 }
@@ -37,11 +37,7 @@ final class CityWeatherCityTableViewCell: UITableViewCell {
             tempLabel.textColor = .white
         }
     }
-    @IBOutlet weak var weatherDescriptionLabel: UILabel! {
-        didSet {
-            weatherDescriptionLabel.textColor = .white.withAlphaComponent(0.4)
-        }
-    }
+    @IBOutlet weak var weatherImage: UIImageView!
     @IBOutlet weak var lowHighTempLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var contentBackView: UIView!
@@ -71,6 +67,7 @@ private extension CityWeatherCityTableViewCell {
         let backgroundGradientHeight = contentBackView.frame.height
         let backgroundGradientWidth = contentBackView.frame.width + 28
         let backgroundGradientFrame = CGRect(x: 0, y: 0, width: backgroundGradientWidth, height: backgroundGradientHeight)
+        contentBackView.backgroundColor = .clear
         contentBackView.addGradientBackground(firstColor: backgroundFirstColor,
                                               secondColor: backgroundSecondColor,
                                               cornerRadius: 20,

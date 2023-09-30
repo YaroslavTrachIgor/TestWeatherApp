@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 //MARK: - Main UIModel
 struct CityWeatherUIModel {
@@ -24,6 +25,6 @@ extension CityWeatherUIModel: BaseCellUIModel {
         cell.cityNameLabel.text = name
         cell.tempLabel.text = temp
         cell.lowHighTempLabel.text = highLowTemperatureDescription
-        cell.weatherDescriptionLabel.text = weatherDescription
+        cell.weatherImage.image = UIImage.weather(weatherDescription)
     }
 }

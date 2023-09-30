@@ -12,13 +12,15 @@ final class DetailCityWeatherFormatter {
     
     //MARK: Static
     static func format(_ cityWeather: CityWeather) -> DetailCityWeatherUIModel {
+        
         return DetailCityWeatherUIModel(name: cityWeather.name,
                                         tempProgress: Float((cityWeather.main.temp - cityWeather.main.temp_min) / (cityWeather.main.temp_max - cityWeather.main.temp_min)),
-                                        tempMin: String(cityWeather.main.temp_min),
-                                        tempMax: String(cityWeather.main.temp_max),
-                                        cloudsAll: cityWeather.clouds.all,
-                                        windSpeed: cityWeather.wind.speed,
-                                        weatherDescription: cityWeather.weather.first!.main
+                                        cloudsAll: "\(Int(cityWeather.clouds.all ?? 0))%",
+                                        cloudsProgress: Float(cityWeather.clouds.all / 100),
+                                        windSpeed: "\(cityWeather.wind.speed ?? 0) m/s",
+                                        detailTempDescription: "H: \(String(Int(cityWeather.main.temp_min))) °F   L: \(String(Int(cityWeather.main.temp_max))) °F",
+                                        weatherDescription: cityWeather.weather.first!.main,
+                                        weatherFooter: "Weather for \(cityWeather.name ?? "")"
         )
     }
 }

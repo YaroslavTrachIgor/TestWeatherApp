@@ -40,6 +40,25 @@ extension UITableView {
 
 
 //MARK: - Color Fast methods
+public extension UIImage {
+    
+    //MARK: Initialization
+    static func weather(_ description: String) -> UIImage? {
+        switch description {
+        case "Mist":
+            return UIImage(systemName: "wind")
+        case "Clear":
+            return UIImage(systemName: "sun.max")
+        case "Clouds":
+            return UIImage(systemName: "cloud")
+        default:
+            return nil
+        }
+    }
+}
+
+
+//MARK: - Color Fast methods
 public extension UIColor {
     
     //MARK: Initialization

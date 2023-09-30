@@ -26,14 +26,17 @@ final class DetailCityWeatherViewController: UIViewController {
     private var loadingView: LoadingView?
     
     //MARK: @IBOutlets
+    @IBOutlet private var contentBackgroundViews: [UIView]!
     @IBOutlet private weak var cityNameLabel: UILabel!
     @IBOutlet private weak var weatherDescriptionLabel: UILabel!
-    @IBOutlet private weak var weatherDetailsSegmentedControl: UISegmentedControl!
-    @IBOutlet private weak var weatherDetailsLabel: UILabel!
+    @IBOutlet private weak var currentTempLabel: UILabel!
+    @IBOutlet private weak var windSpeedLabel: UILabel!
+    @IBOutlet private weak var cloudsPercentLabel: UILabel!
+    @IBOutlet private weak var detailTempLabel: UILabel!
     @IBOutlet private weak var tempProgressView: UIProgressView!
-    @IBOutlet private weak var minTempLabel: UILabel!
-    @IBOutlet private weak var maxTempLabel: UILabel!
-    
+    @IBOutlet private weak var windSpeedProgressView: UIProgressView!
+    @IBOutlet private weak var cloudsPercentProgressView: UIProgressView!
+    @IBOutlet private weak var footerWeatherLabel: UILabel!
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -50,17 +53,21 @@ extension DetailCityWeatherViewController: DetailCityWeatherViewControllerProtoc
     //MARK: Internal
     func show(with uiModel: DetailCityWeatherUIModel) {
         cityNameLabel.text = uiModel.name
-        minTempLabel.text = uiModel.tempMin
-        maxTempLabel.text = uiModel.tempMax
         tempProgressView.progress = uiModel.tempProgress
+        detailTempLabel.text = uiModel.detailTempDescription
         weatherDescriptionLabel.text = uiModel.weatherDescription
+        cloudsPercentProgressView.progress = uiModel.cloudsProgress
+        cloudsPercentLabel.text = uiModel.cloudsAll
+        footerWeatherLabel.text = uiModel.weatherFooter
+        windSpeedLabel.text = uiModel.windSpeed
     }
     
     func setupMainUI() {
-        if tempProgressView.progress > 0.5 {
-            tempProgressView.tintColor = .systemRed
-        } else {
-            tempProgressView.tintColor = .systemBlue
+        view.backgroundColor = .systemGroupedBackground
+        
+        for contentBackgroundView in contentBackgroundViews {
+            contentBackgroundView.layer.cornerRadius = 10
+            contentBackgroundView.backgroundColor = .secondarySystemGroupedBackground
         }
     }
     

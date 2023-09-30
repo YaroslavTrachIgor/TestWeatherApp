@@ -19,7 +19,7 @@ protocol WeatherMenuPresenterProtocol {
 
 //MARK: - Presenter Coordinator delegate protocol
 protocol WeatherMenuPresenterCoordinatorDelegate {
-    func presenter(_ presenter: WeatherMenuPresenterProtocol, onGoToDetailed withStringURL: String?)
+    func presenter(_ presenter: WeatherMenuPresenterProtocol, onGoToDetailed withCityWeather: CityWeather?)
 }
 
 
@@ -96,8 +96,7 @@ extension WeatherMenuPresenter: WeatherMenuPresenterProtocol {
     }
     
     func onDidSelect(row: Int) {
-        let stringURL = stringUrls[row]
-        delegate?.presenter(self, onGoToDetailed: stringURL)
+        delegate?.presenter(self, onGoToDetailed: citiesWeather[row])
     }
 }
 
@@ -108,9 +107,6 @@ private extension WeatherMenuPresenter {
     func fetchCitiesWeather() {
         view.showLoadingView()
         citiesWeather = []
-        for i in stringUrls {
-            print(i)
-        }
         Task {
             await stringUrls.concurrentForEach({ stringUrl in
                 let apiClient = WeatherMenuAPIClient(url: URL(string: stringUrl)!)

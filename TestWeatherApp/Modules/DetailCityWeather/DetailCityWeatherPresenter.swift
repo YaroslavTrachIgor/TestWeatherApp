@@ -31,19 +31,19 @@ protocol DetailCityWeatherPresenterProtocol {
 final class DetailCityWeatherPresenter: DetailCityWeatherPresenterProtocol {
     
     //MARK: Public
-    var stringURL: String!
+    var cityWeather: CityWeather!
     weak var view: DetailCityWeatherViewControllerProtocol!
     
     
     //MARK: Initialization
-    init(view: DetailCityWeatherViewControllerProtocol!, stringURL: String!) {
+    init(view: DetailCityWeatherViewControllerProtocol!, cityWeather: CityWeather!) {
         self.view = view
-        self.stringURL = stringURL
+        self.cityWeather = cityWeather
     }
     
     //MARK: Presenter protocol
     func onViewDidLoad() {
-        fetchCitiesWeather()
+        fetchCityWeather()
         view.setupMainUI()
     }
 }
@@ -53,22 +53,12 @@ final class DetailCityWeatherPresenter: DetailCityWeatherPresenterProtocol {
 private extension DetailCityWeatherPresenter {
     
     //MARK: Private
-    func fetchCitiesWeather() {
+    func fetchCityWeather() {
         view.showLoadingView()
-        Task {
-            let apiClient = WeatherMenuAPIClient(url: URL(string: stringURL)!)
-            do {
-                if let cityWeather = try await apiClient.getCityWeather() {
-                    DispatchQueue.main.async { [self] in
-                        let uiModel = DetailCityWeatherFormatter.format(cityWeather)
-                        view.show(with: uiModel)
-                        view.hideLoadingView()
-                    }
-                }
-            } catch {
-                print(Constants.ErrorMessages.basicMessage)
-                print(error)
-            }
+        if let cityWeather = cityWeather {
+            let uiModel = DetailCityWeatherFormatter.format(cityWeather)
+            view.show(with: uiModel)
+            view.hideLoadingView()
         }
     }
 }

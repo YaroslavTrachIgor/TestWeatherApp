@@ -12,7 +12,7 @@ import UIKit
 protocol Builder {
     init(coordinator: MainCoordinator!)
     func showList(delegate: WeatherMenuPresenterCoordinatorDelegate) -> UIViewController
-    func goToDetail(stringURL: String) -> UIViewController
+    func goToDetail(cityWeather: CityWeather) -> UIViewController
 }
 
 
@@ -40,9 +40,9 @@ extension MainBuilder: Builder {
         return rootVC
     }
     
-    internal func goToDetail(stringURL: String) -> UIViewController {
+    internal func goToDetail(cityWeather: CityWeather) -> UIViewController {
         let rootVC = DetailCityWeatherViewController()
-        let presenter = DetailCityWeatherPresenter(view: rootVC, stringURL: stringURL)
+        let presenter = DetailCityWeatherPresenter(view: rootVC, cityWeather: cityWeather)
         rootVC.presenter = presenter
         return rootVC
     }
